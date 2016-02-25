@@ -1,10 +1,11 @@
 use libc::*;
 use ::address::ENetAddress;
-use ::{ENetBuffer, ENetChecksumCallback, ENetCompressor, ENetInterceptCallback};
+use ::{ENetBuffer, ENetChecksumCallback, ENetCompressor, ENetInterceptCallback, ENetEvent};
 use ::protocol::{ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS, ENetProtocol, ENET_PROTOCOL_MAXIMUM_MTU};
 use ::list::ENetList;
 use ::peer::ENetPeer;
 use ::socket::ENetSocket;
+use ::packet::ENetPacket;
 
 pub const ENET_HOST_RECEIVE_BUFFER_SIZE: size_t = 256 * 1024;
 pub const ENET_HOST_SEND_BUFFER_SIZE: size_t = 256 * 1024;
@@ -56,4 +57,17 @@ pub struct ENetHost {
 extern {
     pub fn enet_host_bandwidth_limit(host: *mut ENetHost, incomingBandwidth: uint32_t,
             outgoingBandwidth: uint32_t);
+    pub fn enet_host_bandwidth_throttle(host: *mut ENetHost);
+    pub fn enet_host_broadcast(host: *mut ENetHost, channelID: uint8_t, packet: *mut ENetPacket);
+    pub fn enet_host_channel_limit(host: *mut ENetHost, channelLimit: size_t);
+    pub fn enet_host_check_events(host: *mut ENetHost, event: *mut ENetEvent) -> c_int;
+    pub fn enet_host_compress(host: *mut ENetHost, compressor: *const ENetCompressor);
+    pub fn enet_host_compress_with_range_coder(host: *mut ENetHost) -> c_int;
+    pub fn enet_host_connect(host: *mut ENetHost, address: *const ENetAddress, channelCount: size_t,
+            data: uint32_t) -> *mut ENetPeer;
+    pub fn enet_host_create(address: *const ENetAddress, peerCount: size_t, channelLimit: size_t,
+            incomingBandwidth: uint32_t, outgoingBandwidth: uint32_t) -> *mut ENetHost;
+    pub fn enet_host_destroy(host: *mut ENetHost);
+    pub fn enet_host_flush(host: *mut ENetHost);
+    pub fn enet_host_service(host: *mut ENetHost, event: *mut ENetEvent, timeout: uint32_t) -> c_int;
 }
