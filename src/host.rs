@@ -1,8 +1,10 @@
 use libc::*;
 use ::address::ENetAddress;
 use ::{ENetBuffer, ENetChecksumCallback, ENetCompressor, ENetInterceptCallback};
-use ::protocol::{ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS, ENetProtocol};
+use ::protocol::{ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS, ENetProtocol, ENET_PROTOCOL_MAXIMUM_MTU};
 use ::list::ENetList;
+use ::peer::ENetPeer;
+use ::socket::ENetSocket;
 
 pub const ENET_HOST_RECEIVE_BUFFER_SIZE: size_t = 256 * 1024;
 pub const ENET_HOST_SEND_BUFFER_SIZE: size_t = 256 * 1024;
@@ -30,9 +32,28 @@ pub struct ENetHost {
     pub headerFlags: uint16_t,
     pub incomingBandwidth: uint32_t,
     pub intercept: ENetInterceptCallback,
-    // TODO: continue here
+    pub maximumPacketSize: size_t,
+    pub maximumWaitingData: size_t,
+    pub mtu: uint32_t,
+    pub outgoingBandwidth: uint32_t,
+    pub packetData: [[uint8_t; ENET_PROTOCOL_MAXIMUM_MTU]; 2],
+    pub packetSize: size_t,
+    pub peerCount: size_t,
+    pub peers: *mut ENetPeer,
+    pub randomSeed: uint32_t,
+    pub recalculateBandwidthLimits: c_int,
+    pub receivedAddress: ENetAddress,
+    pub receivedData: *mut uint8_t,
+    pub receivedDataLength: size_t,
+    pub serviceTime: uint32_t,
+    pub socket: ENetSocket,
+    pub totalReceivedData: uint32_t,
+    pub totalReceivedPackets: uint32_t,
+    pub totalSentData: uint32_t,
+    pub totalSentPackets: uint32_t,
 }
 
 extern {
-    //pub fn enet_host_bandwidth_limit(host: *mut ENetHost)
+    pub fn enet_host_bandwidth_limit(host: *mut ENetHost, incomingBandwidth: uint32_t,
+            outgoingBandwidth: uint32_t);
 }

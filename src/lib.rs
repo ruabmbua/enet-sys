@@ -6,12 +6,13 @@ pub mod protocol;
 pub mod list;
 pub mod packet;
 pub mod peer;
+pub mod socket;
 
 use libc::*;
 use host::ENetHost;
 use packet::ENetPacket;
 use list::ENetList;
-use peer::ENET_PEER_RELIABLE_WINDOWS;
+use peer::{ENET_PEER_RELIABLE_WINDOWS, ENetPeer};
 
 pub type ENetVersion = uint32_t;
 pub type ENetChecksumCallback = extern fn(buffers: *const ENetBuffer, bufferCount: size_t)
@@ -53,10 +54,10 @@ pub struct ENetEvent {
 
 #[repr(C)]
 pub enum ENetEventType {
-    ENET_EVENT_TYPE_NONE,
-    ENET_EVENT_TYPE_CONNECT,
-    ENET_EVENT_TYPE_DISCONNECT,
-    ENET_EVENT_TYPE_RECEIVE,
+    ENET_EVENT_TYPE_NONE = 0,
+    ENET_EVENT_TYPE_CONNECT = 1,
+    ENET_EVENT_TYPE_DISCONNECT = 2,
+    ENET_EVENT_TYPE_RECEIVE = 3,
 }
 
 #[repr(C)]
