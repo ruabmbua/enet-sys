@@ -3,11 +3,20 @@ extern crate libc;
 pub mod address;
 pub mod host;
 pub mod protocol;
+pub mod list;
+pub mod packet;
+pub mod peer;
 
 use libc::*;
+use host::ENetHost;
+use packet::ENetPacket;
+use list::ENetList;
+use peer::ENET_PEER_RELIABLE_WINDOWS;
 
 pub type ENetVersion = uint32_t;
-pub type ENetChecksumCallback = extern fn(buffers: *const ENetBuffer, bufferCount: size_t) -> uint32_t;
+pub type ENetChecksumCallback = extern fn(buffers: *const ENetBuffer, bufferCount: size_t)
+        -> uint32_t;
+pub type ENetInterceptCallback = extern fn(host: *mut ENetHost, event: *mut ENetEvent);
 
 #[repr(C)]
 pub struct ENetCallbacks {
@@ -20,6 +29,46 @@ pub struct ENetCallbacks {
 pub struct ENetBuffer {
     pub data: *mut c_void,
     pub dataLength: size_t,
+}
+
+#[repr(C)]
+pub struct ENetCompressor {
+    pub compress: extern fn(context: *mut c_void, inBuffers: *const ENetBuffer,
+            inBufferCount: size_t, inLimit: size_t, outData: *mut uint8_t, outLimit: size_t)
+            -> size_t,
+    pub context: *mut c_void,
+    pub decompress: extern fn(context: *mut c_void, inData: *const uint8_t, inLimit: size_t,
+            outData: *mut uint8_t, outLimit: size_t) -> size_t,
+    pub destroy: extern fn(context: *mut c_void),
+}
+
+#[repr(C)]
+pub struct ENetEvent {
+    pub channelID: uint8_t,
+    pub data: uint32_t,
+    pub packet: *mut ENetPacket,
+    pub peer: *mut ENetPeer,
+    pub _type: ENetEventType,
+}
+
+#[repr(C)]
+pub enum ENetEventType {
+    ENET_EVENT_TYPE_NONE,
+    ENET_EVENT_TYPE_CONNECT,
+    ENET_EVENT_TYPE_DISCONNECT,
+    ENET_EVENT_TYPE_RECEIVE,
+}
+
+#[repr(C)]
+pub struct ENetChannel {
+    pub incomingReliableCommands: ENetList,
+    pub incomingReliableSequenceNumber: uint16_t,
+    pub incomingUnreliableCommands: ENetList,
+    pub incomingUnreliableSequenceNumber: uint16_t,
+    pub outgoingReliableSequenceNumber: uint16_t,
+    pub outgoingUnrelianleSequenceNumber: uint16_t,
+    pub reliableWindows: [uint16_t; ENET_PEER_RELIABLE_WINDOWS],
+    pub usedReliableWindows: uint16_t,
 }
 
 extern {
