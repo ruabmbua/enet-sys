@@ -89,3 +89,7 @@ pub enum ENetPeerState {
     ENET_PEER_STATE_ACHNOWLEDGING_DISCONNECT = 8,
     ENET_PEER_STATE_ZOMBIE = 9,
 }
+
+extern {
+    // TODO: Continue here.
+}
