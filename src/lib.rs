@@ -13,8 +13,9 @@ pub mod socket;
 use libc::*;
 use host::ENetHost;
 use packet::ENetPacket;
-use list::ENetList;
+use list::{ENetList, ENetListNode};
 use peer::{ENET_PEER_RELIABLE_WINDOWS, ENetPeer};
+use protocol::ENetProtocol;
 
 pub type ENetVersion = uint32_t;
 pub type ENetChecksumCallback = extern fn(buffers: *const ENetBuffer, bufferCount: size_t)
@@ -72,6 +73,40 @@ pub struct ENetChannel {
     pub outgoingUnrelianleSequenceNumber: uint16_t,
     pub reliableWindows: [uint16_t; ENET_PEER_RELIABLE_WINDOWS],
     pub usedReliableWindows: uint16_t,
+}
+
+#[repr(C)]
+pub struct ENetAcknowledgement {
+    pub achnowledgementList: ENetListNode,
+    pub command: ENetProtocol,
+    pub sentTime: uint32_t,
+}
+
+#[repr(C)]
+pub struct ENetIncomingCommand {
+    pub command: ENetProtocol,
+    pub fragmentCount: uint32_t,
+    pub fragments: *mut uint32_t,
+    pub fragmentsRemaining: uint32_t,
+    pub incomingCommandsList: ENetListNode,
+    pub packet: *mut ENetPacket,
+    pub reliableSequenceNumber: uint16_t,
+    pub unreliableSequenceNumber: uint16_t,
+}
+
+#[repr(C)]
+pub struct ENetOutgoingCommand {
+    pub command: ENetProtocol,
+    pub fragmentLength: uint16_t,
+    pub fragmentOffset: uint32_t,
+    pub outgoingCommandList: ENetListNode,
+    pub packet: *mut ENetPacket,
+    pub reliableSequenceNumber: uint16_t,
+    pub roundTripTimeout: uint32_t,
+    pub roundTripTimeoutLimit: uint32_t,
+    pub sendAttempts: uint16_t,
+    pub sentTime: uint32_t,
+    pub unreliableSequenceNumber: uint16_t,
 }
 
 extern {

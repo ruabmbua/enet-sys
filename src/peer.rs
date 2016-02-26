@@ -1,8 +1,10 @@
 use libc::*;
 use ::list::{ENetList, ENetListNode};
 use ::address::ENetAddress;
-use ::ENetChannel;
+use ::{ENetChannel, ENetAcknowledgement, ENetIncomingCommand, ENetOutgoingCommand};
 use ::host::ENetHost;
+use ::protocol::ENetProtocol;
+use packet::ENetPacket;
 
 pub const ENET_PEER_DEFAULT_ROUND_TRIP_TIME: size_t = 500;
 pub const ENET_PEER_DEFAULT_PACKET_THROTTLE: size_t = 32;
@@ -91,5 +93,31 @@ pub enum ENetPeerState {
 }
 
 extern {
-    // TODO: Continue here.
+    pub fn enet_peer_disconnect(peer: *mut ENetPeer, data: uint32_t);
+    pub fn enet_peer_disconnect_later(peer: *mut ENetPeer, data: uint32_t);
+    pub fn enet_peer_disconnect_now(peer: *mut ENetPeer, data: uint32_t);
+    pub fn enet_peer_dispatch_incoming_reliable_commands(peer: *mut ENetPeer, channel: *mut ENetChannel);
+    pub fn enet_peer_dispatch_incoming_unreliable_commands(peer: *mut ENetPeer, channel: *mut ENetChannel);
+    pub fn enet_peer_on_connect(peer: *mut ENetPeer);
+    pub fn enet_peer_on_disconnect(peer: *mut ENetPeer);
+    pub fn enet_peer_ping(peer: *mut ENetPeer);
+    pub fn enet_peer_ping_interval(peer: *mut ENetPeer, pingInterval: uint32_t);
+    pub fn enet_peer_queue_acknowledgement(peer: *mut ENetPeer, command: *const ENetProtocol,
+            sentTime: uint16_t) -> *mut ENetAcknowledgement;
+    pub fn enet_peer_queue_incoming_command(peer: *mut ENetPeer, command: *const ENetProtocol,
+            data: *const c_void, dataLength: size_t, flags: uint32_t, fragmentCount: uint32_t)
+            -> *mut ENetIncomingCommand;
+    pub fn enet_peer_queue_outgoing_command(peer: *mut ENetPeer, command: *const ENetProtocol,
+            packet: *mut ENetPacket, offset: uint32_t, length: uint16_t) -> *mut ENetOutgoingCommand;
+    pub fn enet_peer_receive(peer: *mut ENetPeer, channelID: *mut uint8_t) -> *mut ENetPacket;
+    pub fn enet_peer_reset(peer: *mut ENetPeer);
+    pub fn enet_peer_reset_queues(peer: *mut ENetPeer);
+    pub fn enet_peer_send(peer: *mut ENetPeer, channelID: uint8_t, packet: *mut ENetPacket) -> c_int;
+    pub fn enet_peer_setup_outgoing_command(peer: *mut ENetPeer,
+            outgoingCommand: *mut ENetOutgoingCommand);
+    pub fn enet_peer_throttle(peer: *mut ENetPeer, rtt: uint32_t) -> c_int;
+    pub fn enet_peer_throttle_configure(peer: *mut ENetPeer, interval: uint32_t, acceleration: uint32_t,
+            deceleration: uint32_t);
+    pub fn enet_peer_timeout(peer: *mut ENetPeer, timeoutLimit: uint32_t, timeoutMinimum: uint32_t,
+            timeoutMaximum: uint32_t);
 }
