@@ -22,6 +22,8 @@ pub type ENetChecksumCallback = extern fn(buffers: *const ENetBuffer, bufferCoun
         -> uint32_t;
 pub type ENetInterceptCallback = extern fn(host: *mut ENetHost, event: *mut ENetEvent);
 
+pub const ENET_HOST_ANY : uint32_t = 0;
+
 #[repr(C)]
 pub struct ENetCallbacks {
     pub free: extern fn(memory: *mut c_void),

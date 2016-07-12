@@ -1,6 +1,7 @@
 use libc::*;
 
 #[repr(C)]
+#[derive(Clone,Copy,Debug)]
 pub struct ENetAddress {
     pub host: uint32_t,
     pub port: uint16_t,
