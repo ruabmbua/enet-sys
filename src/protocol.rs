@@ -11,19 +11,21 @@ pub const ENET_PROTOCOL_MAXIMUM_PEER_ID: size_t = 0xfff;
 pub const ENET_PROTOCOL_MAXIMUM_FRAGMENT_COUNT: size_t = 1024 * 1024;
 
 #[repr(C)]
-pub struct ENetProtocol {
-    pub acknowledge: ENetProtocolAcknowledge,
-    pub bandwidthLimit: ENetProtocolBandwidthLimit,
-    pub connect: ENetProtocolConnect,
-    pub disconnect: ENetProtocolDisconnect,
-    pub header: ENetProtocolCommandHeader,
-    pub ping: ENetProtocolPing,
-    pub sendFragment: ENetProtocolSendFragment,
-    pub sendReliable: ENetProtocolSendReliable,
-    pub sendUnreliable: ENetProtocolSendUnreliable,
-    pub sendUnsequenced: ENetProtocolSendUnsequenced,
-    pub throttleConfigure: ENetProtocolThrottleConfigure,
-    pub verifyConnect: ENetProtocolVerifyConnect,
+unsafe_unions!{
+  pub union ENetProtocol: [u8; 48] {
+    acknowledge: ENetProtocolAcknowledge,
+    bandwidthLimit: ENetProtocolBandwidthLimit,
+    connect: ENetProtocolConnect,
+    disconnect: ENetProtocolDisconnect,
+    header: ENetProtocolCommandHeader,
+    ping: ENetProtocolPing,
+    sendFragment: ENetProtocolSendFragment,
+    sendReliable: ENetProtocolSendReliable,
+    sendUnreliable: ENetProtocolSendUnreliable,
+    sendUnsequenced: ENetProtocolSendUnsequenced,
+    throttleConfigure: ENetProtocolThrottleConfigure,
+    verifyConnect: ENetProtocolVerifyConnect,
+  }
 }
 
 #[repr(C)]
