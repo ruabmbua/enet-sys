@@ -28,23 +28,6 @@ unsafe_unions!{
   }
 }
 
-/*
-pub struct ENetProtocol {
-    pub acknowledge: ENetProtocolAcknowledge,
-    pub bandwidthLimit: ENetProtocolBandwidthLimit,
-    pub connect: ENetProtocolConnect,
-    pub disconnect: ENetProtocolDisconnect,
-    pub header: ENetProtocolCommandHeader,
-    pub ping: ENetProtocolPing,
-    pub sendFragment: ENetProtocolSendFragment,
-    pub sendReliable: ENetProtocolSendReliable,
-    pub sendUnreliable: ENetProtocolSendUnreliable,
-    pub sendUnsequenced: ENetProtocolSendUnsequenced,
-    pub throttleConfigure: ENetProtocolThrottleConfigure,
-    pub verifyConnect: ENetProtocolVerifyConnect,
-}
-*/
-
 #[repr(C)]
 pub struct ENetProtocolAcknowledge {
     pub receivedReliableSequenceNumber: uint16_t,
