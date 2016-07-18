@@ -2,6 +2,9 @@
 
 extern crate libc;
 
+#[macro_use]
+extern crate unsafe_unions;
+
 pub mod address;
 pub mod host;
 pub mod protocol;

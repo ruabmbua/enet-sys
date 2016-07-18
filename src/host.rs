@@ -16,6 +16,46 @@ pub const ENET_HOST_DEFAULT_MAXIMUM_WAITING_DATA: size_t = 32 * 1024 * 1024;
 
 #[repr(C)]
 pub struct ENetHost {
+    pub socket: ENetSocket,
+    pub address: ENetAddress,
+    pub incomingBandwidth: uint32_t,
+    pub outgoingBandwidth: uint32_t,
+    pub bandwidthThrottleEpoch: uint32_t,
+    pub mtu: uint32_t,
+    pub randomSeed: uint32_t,
+    pub recalculateBandwidthLimits: c_int,
+    pub peers: *mut ENetPeer,
+    pub peerCount: size_t,
+    pub channelLimit: size_t,
+    pub serviceTime: uint32_t,
+    pub dispatchQueue: ENetList,
+    pub continueSending: c_int,
+    pub packetSize: size_t,
+    pub headerFlags: uint16_t,
+    pub commands: [ENetProtocol; ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS],
+    pub commandCount: size_t,
+    pub buffers: [ENetBuffer; 1+2 * ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS],
+    pub bufferCount: size_t,
+    pub checksum: ENetChecksumCallback,
+    pub compressor: ENetCompressor,
+    pub packetData: [[uint8_t; ENET_PROTOCOL_MAXIMUM_MTU]; 2],
+    pub receivedAddress: ENetAddress,
+    pub receivedData: *mut uint8_t,
+    pub receivedDataLength: size_t,
+    pub totalSentData: uint32_t,
+    pub totalSentPackets: uint32_t,
+    pub totalReceivedData: uint32_t,
+    pub totalReceivedPackets: uint32_t,
+    pub intercept: ENetInterceptCallback,
+    pub connectedPeers: size_t,
+    pub bandwidthLimitedPeers: size_t,
+    pub duplicatePeers: size_t,
+    pub maximumPacketSize: size_t,
+    pub maximumWaitingData: size_t,
+}
+/*
+#[repr(C)]
+pub struct ENetHost {
     pub address: ENetAddress,
     pub bandwidthLimitedPeers: size_t,
     pub bandwidthThrottleEpoch: uint32_t,
@@ -53,6 +93,7 @@ pub struct ENetHost {
     pub totalSentData: uint32_t,
     pub totalSentPackets: uint32_t,
 }
+*/
 
 extern {
     pub fn enet_host_bandwidth_limit(host: *mut ENetHost, incomingBandwidth: uint32_t,
