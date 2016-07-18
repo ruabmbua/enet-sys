@@ -8,6 +8,7 @@ use enet_sys::address::ENetAddress;
 use enet_sys::host::{enet_host_create, enet_host_destroy, ENetHost};
 use enet_sys::list::ENetList;
 use enet_sys::socket::ENetSocket;
+use enet_sys::peer::ENetPeer;
 use enet_sys::protocol::ENetProtocol;
 
 fn main() {
@@ -20,6 +21,9 @@ fn main() {
     println!("size of ENetCompressor: {}", size_of::<ENetCompressor>());
     println!("size of ENetProtocol: {}", size_of::<ENetProtocol>());
     println!("size of ENetBuffer: {}", size_of::<ENetBuffer>());
+
+    println!("size of ENetEvent: {}", size_of::<ENetEvent>());
+    println!("size of ENetPeer: {}", size_of::<ENetPeer>());
 
     println!("Starting test of enet bindings...");
     if unsafe {enet_initialize()} < 0 {

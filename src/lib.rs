@@ -42,10 +42,10 @@ pub struct ENetBuffer {
 
 #[repr(C)]
 pub struct ENetCompressor {
+    pub context: *mut c_void,
     pub compress: extern fn(context: *mut c_void, inBuffers: *const ENetBuffer,
             inBufferCount: size_t, inLimit: size_t, outData: *mut uint8_t, outLimit: size_t)
             -> size_t,
-    pub context: *mut c_void,
     pub decompress: extern fn(context: *mut c_void, inData: *const uint8_t, inLimit: size_t,
             outData: *mut uint8_t, outLimit: size_t) -> size_t,
     pub destroy: extern fn(context: *mut c_void),
@@ -53,11 +53,11 @@ pub struct ENetCompressor {
 
 #[repr(C)]
 pub struct ENetEvent {
+    pub _type: ENetEventType,
+    pub peer: *mut ENetPeer,
     pub channelID: uint8_t,
     pub data: uint32_t,
     pub packet: *mut ENetPacket,
-    pub peer: *mut ENetPeer,
-    pub _type: ENetEventType,
 }
 
 #[repr(C)]
@@ -70,48 +70,48 @@ pub enum ENetEventType {
 
 #[repr(C)]
 pub struct ENetChannel {
-    pub incomingReliableCommands: ENetList,
-    pub incomingReliableSequenceNumber: uint16_t,
-    pub incomingUnreliableCommands: ENetList,
-    pub incomingUnreliableSequenceNumber: uint16_t,
     pub outgoingReliableSequenceNumber: uint16_t,
     pub outgoingUnrelianleSequenceNumber: uint16_t,
-    pub reliableWindows: [uint16_t; ENET_PEER_RELIABLE_WINDOWS],
     pub usedReliableWindows: uint16_t,
+    pub reliableWindows: [uint16_t; ENET_PEER_RELIABLE_WINDOWS],
+    pub incomingReliableSequenceNumber: uint16_t,
+    pub incomingUnreliableSequenceNumber: uint16_t,
+    pub incomingReliableCommands: ENetList,
+    pub incomingUnreliableCommands: ENetList,
 }
 
 #[repr(C)]
 pub struct ENetAcknowledgement {
     pub achnowledgementList: ENetListNode,
-    pub command: ENetProtocol,
     pub sentTime: uint32_t,
+    pub command: ENetProtocol,
 }
 
 #[repr(C)]
 pub struct ENetIncomingCommand {
-    pub command: ENetProtocol,
-    pub fragmentCount: uint32_t,
-    pub fragments: *mut uint32_t,
-    pub fragmentsRemaining: uint32_t,
     pub incomingCommandsList: ENetListNode,
-    pub packet: *mut ENetPacket,
     pub reliableSequenceNumber: uint16_t,
     pub unreliableSequenceNumber: uint16_t,
+    pub command: ENetProtocol,
+    pub fragmentCount: uint32_t,
+    pub fragmentsRemaining: uint32_t,
+    pub fragments: *mut uint32_t,
+    pub packet: *mut ENetPacket,
 }
 
 #[repr(C)]
 pub struct ENetOutgoingCommand {
-    pub command: ENetProtocol,
-    pub fragmentLength: uint16_t,
-    pub fragmentOffset: uint32_t,
     pub outgoingCommandList: ENetListNode,
-    pub packet: *mut ENetPacket,
     pub reliableSequenceNumber: uint16_t,
+    pub unreliableSequenceNumber: uint16_t,
+    pub sentTime: uint32_t,
     pub roundTripTimeout: uint32_t,
     pub roundTripTimeoutLimit: uint32_t,
+    pub fragmentOffset: uint32_t,
+    pub fragmentLength: uint16_t,
     pub sendAttempts: uint16_t,
-    pub sentTime: uint32_t,
-    pub unreliableSequenceNumber: uint16_t,
+    pub command: ENetProtocol,
+    pub packet: *mut ENetPacket,
 }
 
 extern {
