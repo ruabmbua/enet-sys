@@ -6,6 +6,7 @@ description = "Low level bindings to the enet C library"
 license = "MIT"
 repository = "https://github.com/ruabmbua/enet-sys"
 build = "src/build.rs"
+links = "enet"
 
 [dependencies]
 libc = "0.2.7"
