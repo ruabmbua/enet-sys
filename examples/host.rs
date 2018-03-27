@@ -1,10 +1,8 @@
 extern crate enet_sys;
 
-use std::mem::size_of;
-
 use enet_sys::{enet_initialize, enet_deinitialize};
-use enet_sys::address::ENetAddress;
-use enet_sys::host::{enet_host_create, enet_host_destroy};
+use enet_sys::ENetAddress;
+use enet_sys::{enet_host_create, enet_host_destroy};
 
 fn main() {
     println!("Starting test of host creation...");
