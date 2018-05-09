@@ -16,6 +16,6 @@ sudo apt install build-essential clang cmake
 ## Archlinux 
 
 ```bash
-pacman -S base-devel clang
+pacman -S base-devel clang cmake
 ```
 
