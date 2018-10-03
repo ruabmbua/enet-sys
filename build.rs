@@ -9,6 +9,7 @@ fn main() {
     let bindings = bindgen::Builder::default()
         .clang_arg("-Ivendor/enet/include/")
         .header("wrapper.h")
+        .derive_debug(false)
         .generate()
         .expect("Unable to generate bindings");
 
