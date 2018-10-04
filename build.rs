@@ -10,6 +10,7 @@ fn main() {
     let bindings = bindgen::Builder::default()
         .clang_arg("-Ivendor/enet/include/")
         .header("wrapper.h")
+        .derive_debug(false)
         .generate()
         .expect("Unable to generate bindings");
 
@@ -27,6 +28,7 @@ fn main() {
 
     println!("cargo:rustc-link-search=native={}/build", dst.display());
     println!("cargo:rustc-link-lib=static=enet");
+
     if target.contains("windows") {
         println!("cargo:rustc-link-lib=static=winmm");
     }
