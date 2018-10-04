@@ -6,6 +6,7 @@ use std::path::PathBuf;
 use cmake::Config;
 
 fn main() {
+    let target = env::var("TARGET").unwrap();
     let bindings = bindgen::Builder::default()
         .clang_arg("-Ivendor/enet/include/")
         .header("wrapper.h")
@@ -27,4 +28,8 @@ fn main() {
 
     println!("cargo:rustc-link-search=native={}/build", dst.display());
     println!("cargo:rustc-link-lib=static=enet");
+
+    if target.contains("windows") {
+        println!("cargo:rustc-link-lib=static=winmm");
+    }
 }
