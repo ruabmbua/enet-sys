@@ -7,6 +7,7 @@ use cmake::Config;
 
 fn main() {
     let target = env::var("TARGET").unwrap();
+    let is_debug = env::var("DEBUG").unwrap() == "true";
     let bindings = bindgen::Builder::default()
         .clang_arg("-Ivendor/enet/include/")
         .header("wrapper.h")
@@ -26,10 +27,14 @@ fn main() {
 
     eprintln!("LUL: {}", dst.display());
 
-    println!("cargo:rustc-link-search=native={}/build", dst.display());
-    println!("cargo:rustc-link-lib=static=enet");
-
     if target.contains("windows") {
-        println!("cargo:rustc-link-lib=static=winmm");
+        if is_debug {
+            println!("cargo:rustc-link-search=native={}/build/Debug", dst.display());
+        } else {
+            println!("cargo:rustc-link-search=native={}/build/Release", dst.display());
+        }
+    } else {
+        println!("cargo:rustc-link-search=native={}", dst.display());
     }
+    println!("cargo:rustc-link-lib=static=enet");
 }
