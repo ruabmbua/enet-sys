@@ -33,6 +33,7 @@ fn main() {
         } else {
             println!("cargo:rustc-link-search=native={}/build/Release", dst.display());
         }
+        println!("cargo:rustc-link-lib=dylib=winmm");
     } else {
         println!("cargo:rustc-link-search=native={}", dst.display());
     }
