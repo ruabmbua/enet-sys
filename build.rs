@@ -35,7 +35,7 @@ fn main() {
         }
         println!("cargo:rustc-link-lib=dylib=winmm");
     } else {
-        println!("cargo:rustc-link-search=native={}", dst.display());
+        println!("cargo:rustc-link-search=native={}/build", dst.display());
     }
     println!("cargo:rustc-link-lib=static=enet");
 }
