@@ -11,6 +11,7 @@ var searchData=
   ['enet_5fcontext_5frescale',['ENET_CONTEXT_RESCALE',['../compress_8c.html#a6f0ac783cced7c798e7c8dff174a9216',1,'compress.c']]],
   ['enet_5fcontext_5froot_5fdecode',['ENET_CONTEXT_ROOT_DECODE',['../compress_8c.html#ae652387df7e1bc6b8208b4a81a975b6b',1,'compress.c']]],
   ['enet_5fcontext_5ftry_5fdecode',['ENET_CONTEXT_TRY_DECODE',['../compress_8c.html#aeae00b4079592e90ba7183664b2b72cc',1,'compress.c']]],
+  ['enet_5fdifference',['ENET_DIFFERENCE',['../utility_8h.html#aa3623302e6dbe9490571963b61e067ea',1,'utility.h']]],
   ['enet_5fhost_5fany',['ENET_HOST_ANY',['../enet_8h.html#a8a8ff0155e0f7dabaaa466ff9b356d2c',1,'enet.h']]],
   ['enet_5fhost_5fbroadcast',['ENET_HOST_BROADCAST',['../enet_8h.html#a18201db7744ba75106e92fe8bc31dff4',1,'enet.h']]],
   ['enet_5fhost_5fto_5fnet_5f16',['ENET_HOST_TO_NET_16',['../unix_8h.html#a4ede48cf4612d407ac6b6f064e3117bc',1,'ENET_HOST_TO_NET_16():&#160;unix.h'],['../win32_8h.html#a4ede48cf4612d407ac6b6f064e3117bc',1,'ENET_HOST_TO_NET_16():&#160;win32.h']]],

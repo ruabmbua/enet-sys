@@ -2,6 +2,7 @@ var searchData=
 [
   ['eneteventtype',['ENetEventType',['../enet_8h.html#adc5336f0698d4336b587f083d89df414',1,'enet.h']]],
   ['enetpacketflag',['ENetPacketFlag',['../enet_8h.html#a38c59a481ed607b07d63b7bc3e88ca98',1,'enet.h']]],
+  ['enetpeerflag',['ENetPeerFlag',['../enet_8h.html#a4058932f91e17fd65a2b4888306a8f36',1,'enet.h']]],
   ['enetpeerstate',['ENetPeerState',['../enet_8h.html#a058bc368c507eb86cb47f3946f38d558',1,'enet.h']]],
   ['enetprotocolcommand',['ENetProtocolCommand',['../protocol_8h.html#aae6d1b7a85de28aa0c618952db07391a',1,'protocol.h']]],
   ['enetprotocolflag',['ENetProtocolFlag',['../protocol_8h.html#a8dec42a2851e4465d585cfc93c1f9bab',1,'protocol.h']]],

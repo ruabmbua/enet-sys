@@ -10,7 +10,7 @@ var searchData=
   ['command',['command',['../structENetAcknowledgement.html#adaedb41c2536f0e886bbbbeca9035731',1,'ENetAcknowledgement::command()'],['../structENetOutgoingCommand.html#ac29d1868027d963ebb23666f419eb982',1,'ENetOutgoingCommand::command()'],['../structENetIncomingCommand.html#ac20d496fa0e1f155b46bffe3a4d47365',1,'ENetIncomingCommand::command()'],['../structENetProtocolCommandHeader.html#a9ee2cae57bf786e03f9e3bba651467f1',1,'ENetProtocolCommandHeader::command()']]],
   ['commandcount',['commandCount',['../structENetHost.html#a118c74489b3f7f75d77f469709fda24f',1,'ENetHost']]],
   ['commands',['commands',['../structENetHost.html#ab7ca5451e9b1c0152ce4a02c2292a3c3',1,'ENetHost']]],
-  ['compress',['compress',['../structENetCompressor.html#a54c4b6e40e7f4fb1303d19c4e747e81c',1,'ENetCompressor']]],
+  ['compress',['compress',['../structENetCompressor.html#a8e5773dd0069d67df2f500f0bab8f401',1,'ENetCompressor']]],
   ['compress_2ec',['compress.c',['../compress_8c.html',1,'']]],
   ['compressor',['compressor',['../structENetHost.html#ab87717c9898c01920151df8152fbc0cb',1,'ENetHost']]],
   ['connect',['connect',['../unionENetProtocol.html#a018e71efe7c4f1d697ae827f6329fcbd',1,'ENetProtocol']]],

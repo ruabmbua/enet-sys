@@ -14,5 +14,7 @@ var searchData=
   ['roundtriptime',['roundTripTime',['../structENetPeer.html#a3b6841e4b9be13f9323a3c38ee9f2e6c',1,'ENetPeer']]],
   ['roundtriptimeout',['roundTripTimeout',['../structENetOutgoingCommand.html#ad34b6b5da0ff9aea7e6f4f5260f9924d',1,'ENetOutgoingCommand']]],
   ['roundtriptimeoutlimit',['roundTripTimeoutLimit',['../structENetOutgoingCommand.html#a6b213dacb4e8e58ca2d57d4f4352ceb2',1,'ENetOutgoingCommand']]],
-  ['roundtriptimevariance',['roundTripTimeVariance',['../structENetPeer.html#aa2599594c3b06b50a1338d20d837ef9c',1,'ENetPeer']]]
+  ['roundtriptimeremainder',['roundTripTimeRemainder',['../structENetPeer.html#a53c65c553153da1dd328373bd2c0b9c7',1,'ENetPeer']]],
+  ['roundtriptimevariance',['roundTripTimeVariance',['../structENetPeer.html#aa2599594c3b06b50a1338d20d837ef9c',1,'ENetPeer']]],
+  ['roundtriptimevarianceremainder',['roundTripTimeVarianceRemainder',['../structENetPeer.html#a92285a8dc11c7cfa48ff8d9ef0a72294',1,'ENetPeer']]]
 ];
