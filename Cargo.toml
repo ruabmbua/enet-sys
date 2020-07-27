@@ -1,6 +1,6 @@
 [package]
 name = "enet-sys"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Roland Ruckerbauer <roland.rucky@gmail.com>"]
 description = "Low level bindings to the enet C library"
 license = "MIT"
@@ -10,4 +10,4 @@ build = "build.rs"
 
 [build-dependencies]
 bindgen = "0.35.0"
-cmake = "0.1.29"
+cmake = "0.1.44"
