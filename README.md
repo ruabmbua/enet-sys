@@ -19,3 +19,12 @@ sudo apt install build-essential clang cmake
 pacman -S base-devel clang cmake
 ```
 
+# Cloning
+`enet-sys` uses git submodules, either clone it with the `--recursive` option, or run:
+``` git
+git submodule init
+git submodule update
+```
+after cloning it.
+
+**Note:** If you add enet-sys as a dependency to your `Cargo.toml`, cargo will do this for you automatically.
