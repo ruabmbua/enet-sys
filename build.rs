@@ -12,6 +12,8 @@ fn main() {
         .clang_arg("-Ivendor/enet/include/")
         .header("wrapper.h")
         .derive_debug(false)
+        .blocklist_type("ENetPacket")
+        .blocklist_type("_ENetPacket")
         .generate()
         .expect("Unable to generate bindings");
 
@@ -20,7 +22,7 @@ fn main() {
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 
-    
+
     let dst = Config::new("vendor/enet")
                 .build_target("enet")
                 .build();
