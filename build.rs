@@ -14,6 +14,7 @@ fn main() {
         .derive_debug(false)
         .blocklist_type("ENetPacket")
         .blocklist_type("_ENetPacket")
+        .blocklist_type("_?P?IMAGE_TLS_DIRECTORY.*")
         .generate()
         .expect("Unable to generate bindings");
 
