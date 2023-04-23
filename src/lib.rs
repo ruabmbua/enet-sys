@@ -2,7 +2,6 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(improper_ctypes)]
-#![allow(unaligned_references)]
 #![allow(deref_nullptr)]
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
@@ -34,13 +33,13 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 #[derive(Copy, Clone)]
 pub struct _ENetPacket {
     #[doc = "< internal use only"]
-    pub referenceCount: size_t,
+    pub referenceCount: usize,
     #[doc = "< bitwise-or of ENetPacketFlag constants"]
     pub flags: enet_uint32,
     #[doc = "< allocated data for packet"]
     pub data: *mut enet_uint8,
     #[doc = "< length of data"]
-    pub dataLength: size_t,
+    pub dataLength: usize,
     #[doc = "< function to be called when the packet is no longer in use"]
     pub freeCallback: ENetPacketFreeCallback,
     #[doc = "< application private data, may be freely modified"]
