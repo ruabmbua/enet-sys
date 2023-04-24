@@ -1,13 +1,15 @@
 extern crate enet_sys;
 
-use enet_sys::{enet_initialize, enet_deinitialize};
+use enet_sys::{enet_deinitialize, enet_initialize};
 
 fn main() {
     println!("Starting test of enet bindings...");
-    if unsafe {enet_initialize()} < 0 {
+    if unsafe { enet_initialize() } < 0 {
         panic!("Error on enet initialization.");
     }
     println!("Enet initialized.");
-    unsafe {enet_deinitialize();}
+    unsafe {
+        enet_deinitialize();
+    }
     println!("Enet deinitialized.");
 }

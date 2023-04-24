@@ -1,9 +1,9 @@
-extern crate cmake;
 extern crate bindgen;
+extern crate cmake;
 
+use cmake::Config;
 use std::env;
 use std::path::PathBuf;
-use cmake::Config;
 
 fn main() {
     let target = env::var("TARGET").unwrap();
@@ -23,18 +23,21 @@ fn main() {
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 
-
-    let dst = Config::new("vendor/enet")
-                .build_target("enet")
-                .build();
+    let dst = Config::new("vendor/enet").build_target("enet").build();
 
     eprintln!("LUL: {}", dst.display());
 
     if target.contains("windows") {
         if is_debug {
-            println!("cargo:rustc-link-search=native={}/build/Debug", dst.display());
+            println!(
+                "cargo:rustc-link-search=native={}/build/Debug",
+                dst.display()
+            );
         } else {
-            println!("cargo:rustc-link-search=native={}/build/Release", dst.display());
+            println!(
+                "cargo:rustc-link-search=native={}/build/Release",
+                dst.display()
+            );
         }
         println!("cargo:rustc-link-lib=dylib=winmm");
     } else {

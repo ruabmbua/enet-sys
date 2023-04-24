@@ -6,6 +6,11 @@
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
+/// enet size_t type alias for keeping compatible with previous
+/// versions of this crate.
+#[deprecated]
+pub type size_t = usize;
+
 // Items, that could not be generated with bindgen, because they involentarily create valid doctests in their comments.
 
 #[doc = " ENet packet structure."]
