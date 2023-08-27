@@ -27,7 +27,7 @@ fn main() {
 
     eprintln!("LUL: {}", dst.display());
 
-    if target.contains("windows") {
+    if target.contains("windows") && !target.contains("gnu") {
         if is_debug {
             println!(
                 "cargo:rustc-link-search=native={}/build/Debug",
