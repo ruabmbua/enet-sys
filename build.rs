@@ -27,6 +27,10 @@ fn main() {
 
     eprintln!("LUL: {}", dst.display());
 
+    if target.contains("windows") {
+        println!("cargo:rustc-link-lib=dylib=winmm");
+    }
+
     if target.contains("windows") && !target.contains("gnu") {
         if is_debug {
             println!(
@@ -39,7 +43,6 @@ fn main() {
                 dst.display()
             );
         }
-        println!("cargo:rustc-link-lib=dylib=winmm");
     } else {
         println!("cargo:rustc-link-search=native={}/build", dst.display());
     }
